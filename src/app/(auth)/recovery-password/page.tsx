@@ -22,7 +22,7 @@ const RecoveryPassword: React.FC = () => {
             <h2 className="text-5xl font-bold mb-5">
                 Придумайте новый пароль
             </h2>
-            <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4 max-w-3xl min-w-[400px]">
+            <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4 max-w-3xl min-w-full  md:min-w-[400px]">
                 <div className="flex flex-col gap-2">
                     <Input
                         type="password"

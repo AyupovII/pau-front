@@ -1,18 +1,33 @@
 "use client"
+import { signIn } from "@/api/auth"
 import Input from "@/components/Input"
 import { ErrorMessage } from "@/enum/errorsMessage"
 import { useRouter } from "next/navigation"
 import { useForm } from "react-hook-form"
+import { useMutation } from "react-query"
+import { toast } from "react-toastify"
 
 const Auth: React.FC = () => {
     type FormValues = {
-        email: string;
+        login: string;
         password: string;
     };
     const { register, handleSubmit, formState: { errors }, getValues } = useForm<FormValues>({})
     const router = useRouter()
+    const { mutate: signInMutation } = useMutation(signIn,
+        {
+            onSuccess() {
+                // authStore.setToken(localStorage.getItem('token')!);
+                toast.success("Вы успешно авторизованы!");
+            },
+            onError(e) {
+                toast.error(String(e))
+            }
+
+        }
+    );
     const onSubmit = (data: FormValues) => {
-        console.log(errors)
+        signInMutation({...data})
 
     }
     console.log(errors)
@@ -22,18 +37,18 @@ const Auth: React.FC = () => {
             <h2 className="text-5xl font-bold mb-5">
                 Авторизация
             </h2>
-            <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4 max-w-3xl min-w-[400px]">
+            <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4 max-w-3xl min-w-full  md:min-w-[400px]">
                 <div className="flex flex-col gap-2">
                     <Input
                         type="text"
                         {...register(
-                            "email",
+                            "login",
                             {
                                 required: ErrorMessage.REQUIRED,
                                 pattern: { value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i, message: ErrorMessage.INVALID_EMAIL }
                             })}
                         placeholder="Email"
-                        error={errors.email?.message as string}
+                        error={errors.login?.message as string}
                     />
                     <Input
                         type="password"

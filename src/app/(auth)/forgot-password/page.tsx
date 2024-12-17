@@ -22,7 +22,7 @@ const ForgotPassword: React.FC = () => {
                 Забыли пароль
             </h2>
             <p className="mb-2 text-sm">На этот адрес будет выслана ссылка для сброса пароля</p>
-            <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4 max-w-3xl min-w-[400px]">
+            <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4 max-w-3xl min-w-full  md:min-w-[400px]">
                 <div className="flex flex-col gap-2">
                     <Input
                         type="text"
