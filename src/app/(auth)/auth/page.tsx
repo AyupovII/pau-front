@@ -5,9 +5,13 @@ import { useRouter } from "next/navigation"
 import { useForm } from "react-hook-form"
 
 const Auth: React.FC = () => {
-    const { register, handleSubmit, formState: { errors }, getValues } = useForm({})
+    type FormValues = {
+        email: string;
+        password: string;
+    };
+    const { register, handleSubmit, formState: { errors }, getValues } = useForm<FormValues>({})
     const router = useRouter()
-    const onSubmit = (data: any) => {
+    const onSubmit = (data: FormValues) => {
         console.log(errors)
 
     }
@@ -36,7 +40,7 @@ const Auth: React.FC = () => {
                         {...register(
                             "password",
                             {
-                                required: { value: true, message: ErrorMessage.REQUIRED},
+                                required: { value: true, message: ErrorMessage.REQUIRED },
                                 minLength: { value: 6, message: ErrorMessage.MIN_LENGTH }
                             })}
                         placeholder="Password"

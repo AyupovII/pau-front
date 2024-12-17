@@ -5,9 +5,12 @@ import { useRouter } from "next/navigation"
 import { useForm } from "react-hook-form"
 
 const ForgotPassword: React.FC = () => {
-    const { register, handleSubmit, formState: { errors }, getValues } = useForm({})
+    type FormValues = {
+        email: string;
+    };
+    const { register, handleSubmit, formState: { errors }, getValues } = useForm<FormValues>({})
     const router = useRouter()
-    const onSubmit = (data: any) => {
+    const onSubmit = (data: FormValues) => {
         console.log(errors)
 
     }

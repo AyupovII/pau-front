@@ -2,12 +2,16 @@
 import Input from "@/components/Input"
 import { ErrorMessage } from "@/enum/errorsMessage"
 import { useRouter } from "next/navigation"
-import { useForm } from "react-hook-form"
+import { Resolver, SubmitHandler, useForm } from "react-hook-form"
 
 const RecoveryPassword: React.FC = () => {
-    const { register, handleSubmit, formState: { errors }, getValues } = useForm({})
+    type FormValues = {
+        password: string;
+        repeatPassword: string;
+    };
+    const { register, handleSubmit, formState: { errors }, getValues } = useForm<FormValues>({})
     const router = useRouter()
-    const onSubmit = (data: any) => {
+    const onSubmit = (data: FormValues) => {
         console.log(errors)
 
     }

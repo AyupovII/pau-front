@@ -37,7 +37,7 @@ export default function Home() {
                     Цена:
                   </p>
                   <p>
-                    {(333322100000).toLocaleString('ru-RU')}&nbsp;рублей
+                    {`${(333322100000).toLocaleString('ru-RU')}`}&nbsp;рублей
                   </p>
                 </div>
                 <button className="btn w-full">Подробнее</button>
