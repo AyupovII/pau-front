@@ -1,7 +1,9 @@
 "use client"
 import { signIn } from "@/api/auth"
 import Input from "@/components/Input"
+import { AuthorizationStatus } from "@/enum/auth"
 import { ErrorMessage } from "@/enum/errorsMessage"
+import store from "@/store"
 import { useRouter } from "next/navigation"
 import { useForm } from "react-hook-form"
 import { useMutation } from "react-query"
@@ -12,13 +14,15 @@ const Auth: React.FC = () => {
         login: string;
         password: string;
     };
+    const {authStore} = store;
     const { register, handleSubmit, formState: { errors }, getValues } = useForm<FormValues>({})
     const router = useRouter()
     const { mutate: signInMutation } = useMutation(signIn,
         {
             onSuccess() {
-                // authStore.setToken(localStorage.getItem('token')!);
                 toast.success("Вы успешно авторизованы!");
+                authStore.setAuth(AuthorizationStatus.Auth)
+                router.push('/')
             },
             onError(e) {
                 toast.error(String(e))
@@ -34,10 +38,10 @@ const Auth: React.FC = () => {
 
     return (
         <div className="flex items-center justify-center h-full flex-col">
-            <h2 className="text-5xl font-bold mb-5">
+            <h2>
                 Авторизация
             </h2>
-            <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4 max-w-3xl min-w-full  md:min-w-[400px]">
+            <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4 max-w-3xl min-w-full  md:min-w-[580px]">
                 <div className="flex flex-col gap-2">
                     <Input
                         type="text"
@@ -62,8 +66,8 @@ const Auth: React.FC = () => {
                         error={errors.password?.message as string}
                     />
                 </div>
-                <button type="submit" className="btn">Submit</button>
-                <p className="underline cursor-pointer" onClick={() => router.push('/recovery-password')}>Забыли пароль?</p>
+                <button type="submit">Submit</button>
+                <p className="underline cursor-pointer" onClick={() => router.push('/forgot-password')}>Забыли пароль?</p>
             </form>
         </div>
     )

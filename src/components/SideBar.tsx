@@ -53,7 +53,7 @@ const SideBar: React.FC = () => {
       <div className="h-[70px]">
         logo
       </div>
-      <button className="btn" onClick={() => setIsHidden(!isHidden)}>ntcn</button>
+      <button onClick={() => setIsHidden(!isHidden)}>ntcn</button>
       <div className="mt-2">
         {!isHidden && <ul className="flex flex-col gap-2">
           {categorylist.map((item) => (

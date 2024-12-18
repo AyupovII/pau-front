@@ -12,7 +12,7 @@ const Input: React.FC<InputProps> = ({ label, error, ...props }) => {
                 <input
                     {...props}
                     type={props.type === "password" && !showPassword ? "password" : "text"}
-                    className="input" placeholder={props.placeholder}
+                    placeholder={props.placeholder}
                 />
                 {
                     props.type === "password" &&

@@ -25,7 +25,7 @@ export const signIn = async ({ login, password }: { login: string, password: str
     localStorage.setItem('token', res.data.token)
     return res.data
   })
-    .catch((error: ErrorType | any) => { throw new Error(`Ошибка! ${error?.response?.data?.message}`) })
+    .catch((error: ErrorType | any) => { throw (`Ошибка! ${error?.response?.data?.message}`) })
 }
 export const recoveryPassCheckCode = async ({ userId, passwordRecoveryCode }: { userId: string, passwordRecoveryCode: string }) => {
   await axios.post(`${API_URL}/recovery-pass-check-code`,
@@ -42,7 +42,7 @@ export const recoveryPassCheckCode = async ({ userId, passwordRecoveryCode }: { 
 
     return res.data
   })
-    .catch((error: ErrorType | any) => { throw new Error(`Ошибка! ${error?.response?.data?.message}`) })
+    .catch((error: ErrorType | any) => { throw (`Ошибка! ${error?.response?.data?.message}`) })
 }
 export const recoveryPassFinish = async ({ userId, passwordRecoveryCode, password }: { userId: string, passwordRecoveryCode: string, password: string }) => {
   await axios.post(`${API_URL}/recovery-pass-finish`,
@@ -60,7 +60,7 @@ export const recoveryPassFinish = async ({ userId, passwordRecoveryCode, passwor
 
     return res.data
   })
-    .catch((error: ErrorType | any) => { throw new Error(`Ошибка! ${error?.response?.data?.message}`) })
+    .catch((error: ErrorType | any) => { return (` ${error?.response?.data?.message}`) })
 }
 
 export const regStart = async (body: any) => {
@@ -75,7 +75,7 @@ export const regStart = async (body: any) => {
     });
     return response;
   } catch (error: ErrorType | any) {
-    throw new Error(`Ошибка! ${error?.response?.data?.message}`);
+    throw (`Ошибка! ${error?.response?.data?.message}`);
   }
 };
 
@@ -91,6 +91,6 @@ export const recoveryPassStart = async (email: string) => {
     });
     return response;
   } catch (error: ErrorType | any) {
-    throw new Error(`Ошибка! ${error?.response?.data?.message}`);
+    throw (`Ошибка! ${error?.response?.data?.message}`);
   }
 };

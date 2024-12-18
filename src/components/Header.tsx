@@ -1,22 +1,39 @@
 'use client'
+import { AuthorizationStatus } from "@/enum/auth";
+import store from "@/store";
+import { observer } from "mobx-react-lite";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const Header: React.FC = () => {
+  const { authStore } = store;
   const router = useRouter();
   const [openSearch, setOpenSearch] = useState(false)
+
+  const control =
+    <>
+      {authStore.isAuth === AuthorizationStatus.Auth && <button>Добавить лот</button>}
+      <button onClick={() => (authStore.logout(), router.push('/auth'))}>{authStore.isAuth === AuthorizationStatus.Auth ? 'Выйти' : 'Войти'}</button>
+    </>
+
+  useEffect(() => {
+    console.log(authStore.isAuth)
+    if (localStorage.getItem('token'))
+      authStore.setAuth(AuthorizationStatus.Auth)
+    else
+      authStore.setAuth(AuthorizationStatus.NoAuth)
+  }, [authStore.isAuth])
   return (
     ///desktop
     <>
       <div className=" h-[70px] items-center px-5 border-b z-10 hidden md:flex">
         <div className="flex place-content-between w-full h-[50px]">
           <div className="items-center gap-5 h-full w-[50%] place-content-between flex">
-            <input className="input" placeholder="Поиск по названию лота или ФИО должника" />
-            <button className="btn">Найти</button>
+            <input placeholder="Поиск по названию лота или ФИО должника" />
+            <button>Найти</button>
           </div>
           <div className="flex items-center gap-3">
-            <button className="btn">Добавить лот</button>
-            <button className="btn" onClick={() => router.push('/auth')}>Войти</button>
+            {control}
           </div>
         </div>
       </div>
@@ -24,9 +41,8 @@ const Header: React.FC = () => {
       <div className="flex h-[70px] items-center px-5 border-b z-10 md:hidden">
         <div className="flex flex-col w-full h-[50px]">
           <div className="flex items-center gap-3  justify-end">
-            <button className="btn">Добавить лот</button>
-            <button className="btn" onClick={() => router.push('/auth')}>Войти</button>
-            <button className="btn relative" onClick={() => setOpenSearch(!openSearch)}>
+            {control}
+            <button className="relative" onClick={() => setOpenSearch(!openSearch)}>
               <svg className="text-gray-600 h-5 w-5 absolute top-3.5 right-auto fill-current dark:text-gray-600"
                 x="0px" y="0px" viewBox="0 0 56.966 56.966">
                 <path
@@ -36,8 +52,8 @@ const Header: React.FC = () => {
             </button>
           </div>
           <div className={`items-center gap-3 h-full place-content-between flex w-full mt-3 ${openSearch ? "scale-y-100" : "scale-y-0"} transition-all`}>
-            <input className="input w-full" placeholder="Поиск по названию лота или ФИО должника" />
-            <button className="btn">Найти</button>
+            <input className="w-full" placeholder="Поиск по названию лота или ФИО должника" />
+            <button>Найти</button>
           </div>
         </div>
       </div>
@@ -45,4 +61,4 @@ const Header: React.FC = () => {
   );
 }
 
-export default Header
+export default observer(Header)
