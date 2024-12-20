@@ -4,7 +4,7 @@ import Input from "@/components/Input"
 import { ErrorMessage } from "@/enum/errorsMessage"
 import store from "@/store"
 import { useRouter, useSearchParams } from "next/navigation"
-import { useLayoutEffect } from "react"
+import { Suspense, useLayoutEffect } from "react"
 import { Resolver, SubmitHandler, useForm } from "react-hook-form"
 import { useMutation } from "react-query"
 import { toast } from "react-toastify"
@@ -16,9 +16,9 @@ const RecoveryPassword: React.FC = () => {
     };
     const router = useRouter()
     const searchParams = useSearchParams();
-    let passwordRecoveryCode = searchParams.get("passwordRecoveryCode") ?? "";
-    let userId = searchParams.get("userId") ?? "";
-    const {authStore} = store;
+    const passwordRecoveryCode = searchParams.get("passwordRecoveryCode") ?? "";
+    const userId = searchParams.get("userId") ?? "";
+    const { authStore } = store;
     const { register, handleSubmit, formState: { errors }, getValues } = useForm<FormValues>({})
     const { mutate: recoveryPassCheckCodeMutation } = useMutation(recoveryPassCheckCode, {
         onSuccess() {
@@ -86,7 +86,15 @@ const RecoveryPassword: React.FC = () => {
                 <p> Уже есть аккаунт? <span className="font-bold underline cursor-pointer" onClick={() => router.push('/auth')}>Войти</span></p>
             </form>
         </div>
+
+    )
+}
+const Page: React.FC = () => {
+    return (
+        <Suspense >
+            <RecoveryPassword />
+        </Suspense>
     )
 }
 
-export default RecoveryPassword
+export default Page

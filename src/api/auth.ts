@@ -25,7 +25,7 @@ export const signIn = async ({ login, password }: { login: string, password: str
     localStorage.setItem('token', res.data.token)
     return res.data
   })
-    .catch((error: ErrorType | any) => { throw (`Ошибка! ${error?.response?.data?.message}`) })
+    .catch((error: unknown) => { throw (`Ошибка! ${(error as ErrorType).response?.data?.message}`) })
 }
 export const recoveryPassCheckCode = async ({ userId, passwordRecoveryCode }: { userId: string, passwordRecoveryCode: string }) => {
   await axios.post(`${API_URL}/recovery-pass-check-code`,
@@ -42,7 +42,7 @@ export const recoveryPassCheckCode = async ({ userId, passwordRecoveryCode }: { 
 
     return res.data
   })
-    .catch((error: ErrorType | any) => { throw (`Ошибка! ${error?.response?.data?.message}`) })
+    .catch((error: unknown) => { throw (`Ошибка! ${(error as ErrorType).response?.data?.message}`) })
 }
 export const recoveryPassFinish = async ({ userId, passwordRecoveryCode, password }: { userId: string, passwordRecoveryCode: string, password: string }) => {
   await axios.post(`${API_URL}/recovery-pass-finish`,
@@ -60,24 +60,24 @@ export const recoveryPassFinish = async ({ userId, passwordRecoveryCode, passwor
 
     return res.data
   })
-    .catch((error: ErrorType | any) => { return (` ${error?.response?.data?.message}`) })
+    .catch((error: unknown) => { return (` ${(error as ErrorType).response?.data?.message}`) })
 }
 
-export const regStart = async (body: any) => {
-  try {
-    const response = await axios.post(`${API_URL}/reg-start`, {
-      ...body
-    }, {
-      headers: {
-        'Content-Type': 'multipart/form-data',
-        Authorization: `Bearer ${localStorage.getItem('token')}`,
-      },
-    });
-    return response;
-  } catch (error: ErrorType | any) {
-    throw (`Ошибка! ${error?.response?.data?.message}`);
-  }
-};
+// export const regStart = async (body: any) => {
+//   try {
+//     const response = await axios.post(`${API_URL}/reg-start`, {
+//       ...body
+//     }, {
+//       headers: {
+//         'Content-Type': 'multipart/form-data',
+//         Authorization: `Bearer ${localStorage.getItem('token')}`,
+//       },
+//     });
+//     return response;
+//   } catch (error: unknown) {
+//     throw (`Ошибка! ${(error as ErrorType).response?.data?.message}`);
+//   }
+// };
 
 export const recoveryPassStart = async (email: string) => {
   try {
@@ -90,7 +90,7 @@ export const recoveryPassStart = async (email: string) => {
       },
     });
     return response;
-  } catch (error: ErrorType | any) {
-    throw (`Ошибка! ${error?.response?.data?.message}`);
+  } catch (error: unknown) {
+    throw (`Ошибка! ${(error as ErrorType)?.response?.data?.message}`);
   }
 };
