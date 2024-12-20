@@ -1,4 +1,9 @@
+"use client"
+
+import { useRouter } from "next/navigation";
+
 const Card: React.FC = () => {
+    const router = useRouter();
     return (
         <div className="flex place-content-between border-2 border-gray-200">
             <div className="flex w-full">
@@ -27,7 +32,7 @@ const Card: React.FC = () => {
                             {`${(333322100000).toLocaleString('ru-RU')}`}&nbsp;рублей
                         </p>
                     </div>
-                    <button className="w-full">Подробнее</button>
+                    <button className="w-full" onClick={() => router.push('/categories/1')}>Подробнее</button>
                 </div>
             </div>
         </div>
