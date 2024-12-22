@@ -12,7 +12,7 @@ const Header: React.FC = () => {
 
   const control =
     <>
-      {authStore.isAuth === AuthorizationStatus.Auth && <button>Добавить лот</button>}
+      {authStore.isAuth === AuthorizationStatus.Auth && <button onClick={() => router.push('/categories/create')}>Добавить лот</button>}
       <button onClick={() => (authStore.logout(), router.push('/auth'))}>{authStore.isAuth === AuthorizationStatus.Auth ? 'Выйти' : 'Войти'}</button>
     </>
 

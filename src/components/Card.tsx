@@ -1,15 +1,18 @@
 "use client"
 
 import { useRouter } from "next/navigation";
+import catImg from "../assets/img/cat.jpg"
+import Image from "next/image"
+
 
 const Card: React.FC = () => {
     const router = useRouter();
     return (
         <div className="flex place-content-between border-2 border-gray-200">
-            <div className="flex w-full">
-                <div className="min-w-[150px] min-h-[150px] bg-gray-100 flex items-center justify-center">
-                    Изображение
-                </div>
+            <div className="flex w-full flex-col md:flex-row">
+                <Image src={catImg} alt="cat"
+                    className=" bg-gray-100 flex items-center justify-center object-cover min-w-[150px] min-h-[150px] lg:min-w-[150px] lg:min-h-[150px] md:min-w-full md:min-h-full"
+                />
                 <div className="flex flex-col p-2 justify-between grow">
                     <p>
                         Производственный комплекс АО ДКМП (недвижимое имущесто, коммуникации и оборудование), находящееся в залоге АО РСХБ и нелоговое
@@ -23,7 +26,7 @@ const Card: React.FC = () => {
                         </p>
                     </div>
                 </div>
-                <div className="flex flex-col gap-2 h-full p-2 min-w-64">
+                <div className="flex flex-col gap-2 h-full p-2 lg:min-w-64">
                     <div className="bg-gray-200 flex flex-col items-center grow justify-center">
                         <p>
                             Цена:
@@ -35,7 +38,7 @@ const Card: React.FC = () => {
                     <button className="w-full" onClick={() => router.push('/categories/1')}>Подробнее</button>
                 </div>
             </div>
-        </div>
+        </div >
     )
 }
 

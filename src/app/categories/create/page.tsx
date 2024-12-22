@@ -5,17 +5,19 @@ import TextArea from "@/components/TextArea"
 import { Autocomplete, Checkbox, FormControlLabel, TextField } from "@mui/material"
 
 const CategoriesId: React.FC = () => {
-    const top100Films = [
-        { label: 'The Godfather', year: 1972 },
-        { label: 'The Godfather: Part II', year: 1974 },
-        { label: 'The Dark Knight', year: 2008 },
-        { label: '12 Angry Men', year: 1957 },
-        { label: "Schindler's List", year: 1993 },
-        { label: 'Pulp Fiction', year: 1994 }]
+    const option1 = [
+        { label: 'Лот на Альфалот', id: 0 },
+        { label: 'Лот через форму', id: 1 },
+    ];
+    const option2 = [
+        { label: 'В работе', id: 0 },
+        { label: 'Архив', id: 1 },
+    ];
     return (
         <div>
-            <h3>Добавление нового лота</h3>
-            <div className="flex flex-row gap-5">
+            <h3 className="mt-4">Добавление нового лота</h3>
+            <div>
+            <div className="flex flex-row gap-5 border-b-2 pb-4">
                 <div className="w-full">
                     <div>
                         <Input placeholder="Название лота" />
@@ -25,7 +27,6 @@ const CategoriesId: React.FC = () => {
                         <TextArea placeholder="Описание" rows={10} />
                         <FileInput label="Прикрепить документы" multiple />
                     </div>
-                    <button>Сохранить</button>
                 </div>
                 <div className="min-w-64">
                     <div>
@@ -70,30 +71,57 @@ const CategoriesId: React.FC = () => {
                                 control={<Checkbox defaultChecked={false} />}
                             />
                         </div>
-                        <Autocomplete
-                            disablePortal
-                            options={top100Films}
-                            className="[&>.MuiOutlinedInput-root]:py-0"
-                            renderInput={(params) => <TextField {...params} 
-                            sx={{
-                                '& .MuiOutlinedInput-root': {
-                                    paddingTop: 0,
-                                    paddingBottom: 0,
-                                //   '& fieldset': {
-                                //     // border: 'none', // Remove bottom line
-                                //   }
-                                  '& input': {
-                                    paddingTop: "0 !important",
-                                    paddingBottom: "0 !important",
-                                  }
-                                },
-                              }}
-                            />}
-                        />
+                        <div>
+                            <h4>Выберите формат</h4>
+                            <Autocomplete
+                                options={option1}
+                                className="[&>.MuiOutlinedInput-root]:py-0"
+                                renderInput={(params) => <TextField {...params}
+                                    sx={{
+                                        '& .MuiOutlinedInput-root': {
+                                            paddingTop: 0,
+                                            paddingBottom: 0,
+                                            //   '& fieldset': {
+                                            //     // border: 'none', // Remove bottom line
+                                            //   }
+                                            '& input': {
+                                                paddingTop: "0 !important",
+                                                paddingBottom: "0 !important",
+                                            }
+                                        },
+                                    }}
+                                />}
+                            />
+                        </div>
+                        <TextArea placeholder="Укажите ссылку" rows={3} />
+                        <div>
+                            <h4>Выберите статус</h4>
+                            <Autocomplete
+                                options={option2}
+                                className="[&>.MuiOutlinedInput-root]:py-0"
+                                renderInput={(params) => <TextField {...params}
+                                    sx={{
+                                        '& .MuiOutlinedInput-root': {
+                                            paddingTop: 0,
+                                            paddingBottom: 0,
+                                            //   '& fieldset': {
+                                            //     // border: 'none', // Remove bottom line
+                                            //   }
+                                            '& input': {
+                                                paddingTop: "0 !important",
+                                                paddingBottom: "0 !important",
+                                            }
+                                        },
+                                    }}
+                                />}
+                            />
+                        </div>
                     </div>
                 </div>
+                
             </div>
-
+            <button className="mt-5">Сохранить</button>
+            </div>
         </div>
     )
 }
