@@ -12,7 +12,7 @@ export default function Home() {
         <p className="text-gray-500">Найдено: 117 лотов</p>
         <p className="text-gray-500">Сортировать: по новизне</p>
       </div>
-      <div className="flex flex-col gap-2">
+      <div className="flex flex-col gap-2 lg:flex md:grid md:grid-cols-2">
         {[...Array(10)].map((_, i) => (
           <Card key={i} />
         ))}

@@ -1,19 +1,15 @@
-'use client'
 import Card from "@/components/Card";
 import CategorySwiper from "@/components/CategorySwiper";
 import InfoTabs from "@/components/InfoTabs";
-import { useRouter } from "next/navigation";
+import Link from "next/link";
 import { use } from "react";
 
-import 'swiper/css';
 interface Props {
     params: Promise<{ id: string }>
 }
 
 const CategoriesId: React.FC<Props> = ({ params }) => {
-    //   const { id } = router;
     const { id } = use(params);
-    const router = useRouter()
     console.log(id)
     return (
         <div>
@@ -68,13 +64,15 @@ const CategoriesId: React.FC<Props> = ({ params }) => {
                     </div>
                     <div className="flex gap-2.5">
                         <button>Участвовать в торгах</button>
-                        <button onClick={() => router.push(`/categories/${id}/edit`)}>Редактировать лот</button>
+                        <Link href={`/categories/${id}/edit`}>
+                            <button>Редактировать лот</button>
+                        </Link>
                     </div>
                 </div>
             </div>
             <InfoTabs />
             <h3>Похожие лоты</h3>
-            <div className="flex flex-col gap-2">
+            <div className="flex flex-col gap-2 lg:flex md:grid md:grid-cols-2">
                 {[...Array(10)].map((_, i) => (
                     <Card key={i} />
                 ))}

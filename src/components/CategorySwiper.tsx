@@ -1,9 +1,10 @@
+"use client"
 import { Navigation, Autoplay, Thumbs, FreeMode, EffectCoverflow } from "swiper/modules"
 import { SwiperSlide, Swiper, SwiperClass } from "swiper/react"
 import Image from "next/image"
 import img from "../assets/img/cat.jpg"
 import 'swiper/css';
-import { useState } from "react";
+import { use, useState } from "react";
 import { useMediaQuery } from "@uidotdev/usehooks";
 
 const CategorySwiper: React.FC = () => {
@@ -16,15 +17,15 @@ const CategorySwiper: React.FC = () => {
             <Swiper
                 modules={[Navigation, Autoplay, Thumbs, FreeMode, EffectCoverflow]}
                 effect='coverflow'
-
+                direction={isLargeDevice ? "horizontal" : "vertical"}
                 navigation={{
                     nextEl: '.swiper-button-next',
                     prevEl: '.swiper-button-prev',
                 }}
-                // autoplay={{ delay: 3000 }}
+                autoplay={{ delay: 3000 }}
                 loop
                 thumbs={{ swiper: activeThumb && !activeThumb.destroyed ? activeThumb : null }}
-                className="w-72"
+                className="w-72 h-72 "
             >
                 <SwiperSlide className="w-52">
                     <Image

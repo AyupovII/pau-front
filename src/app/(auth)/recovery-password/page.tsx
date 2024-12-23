@@ -47,8 +47,6 @@ const RecoveryPassword: React.FC = () => {
     useLayoutEffect(() => {
         recoveryPassCheckCodeMutation({ userId, passwordRecoveryCode })
     }, [])
-    console.log(passwordRecoveryCode, userId)
-    // ?passwordRecoveryCode=lhdyc67cdwj8wy665jbcnf6vyf26eqla&userId=27
 
     return (
         <div className="flex items-center justify-center h-full flex-col">

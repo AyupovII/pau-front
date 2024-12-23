@@ -1,3 +1,5 @@
+"use client"
+
 import { Tab, Tabs } from "@mui/material";
 import { useState } from "react";
 import HiddenText from "./HiddenText";

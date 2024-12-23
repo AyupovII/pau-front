@@ -1,17 +1,15 @@
-"use client"
 
-import { useRouter } from "next/navigation";
 import catImg from "../assets/img/cat.jpg"
 import Image from "next/image"
+import Link from "next/link";
 
 
 const Card: React.FC = () => {
-    const router = useRouter();
     return (
-        <div className="flex place-content-between border-2 border-gray-200">
-            <div className="flex w-full flex-col md:flex-row">
+        <div className="flex place-content-between border-2 border-gray-200 rounded-2xl overflow-hidden">
+            <div className="flex w-full flex-col lg:flex-row">
                 <Image src={catImg} alt="cat"
-                    className=" bg-gray-100 flex items-center justify-center object-cover min-w-[150px] min-h-[150px] lg:min-w-[150px] lg:min-h-[150px] md:min-w-full md:min-h-full"
+                    className=" bg-gray-100 flex items-center justify-center object-cover self-center min-w-full min-h-[200px] lg:min-w-[150px]  md:min-w-full md:h-200"
                 />
                 <div className="flex flex-col p-2 justify-between grow">
                     <p>
@@ -26,7 +24,7 @@ const Card: React.FC = () => {
                         </p>
                     </div>
                 </div>
-                <div className="flex flex-col gap-2 h-full p-2 lg:min-w-64">
+                <div className="flex flex-col gap-2 h-40 p-2 lg:min-w-64  md:h-full">
                     <div className="bg-gray-200 flex flex-col items-center grow justify-center">
                         <p>
                             Цена:
@@ -35,7 +33,9 @@ const Card: React.FC = () => {
                             {`${(333322100000).toLocaleString('ru-RU')}`}&nbsp;рублей
                         </p>
                     </div>
-                    <button className="w-full" onClick={() => router.push('/categories/1')}>Подробнее</button>
+                    <Link href="/categories/1">
+                        <button className="w-full">Подробнее</button>
+                    </Link>
                 </div>
             </div>
         </div >
