@@ -52,7 +52,7 @@ const MenuList: React.FC<{ openMenu?: boolean }> = ({ openMenu = false }) => {
     return (
         <ul className="flex flex-col gap-2">
             {categorylist.map((item) => (
-                <li key={item.id} className="flex gap-1">
+                <li key={item.id} className="flex gap-1 text-white hover:text-gold-dark">
                     <a href={item.url}>{item.title}</a>
                     <p className="">{item.count}</p>
                 </li>

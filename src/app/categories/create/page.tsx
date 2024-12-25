@@ -35,7 +35,7 @@ const CategoriesId: React.FC = () => {
                                 <div className="flex flex-col">
                                     <FormControlLabel
                                         label="Транспорт"
-                                        control={<Checkbox defaultChecked={false} />}
+                                        control={<Checkbox defaultChecked={false}/>}
                                     />
                                     <FormControlLabel
                                         label="Земельный участок"
